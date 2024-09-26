@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>Horários de Funcionamento</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            background-image: url('./img/Captura\ de\ tela\ 2024-08-05\ 145526.png'); 
+            background-size: cover; 
+            background-position: center; 
+            background-repeat: no-repeat; 
+            height: 100vh; 
+            padding: 20px;
+        }
+        
+nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 45px;
+    padding-left: 8%;
+    padding-right: 8%;
+}
+
+        .hours-container {
+            width: 100%;
+            max-width: 800px;
+            margin: auto;
+        }
+        h1 {
+            text-align: center;
+            color: #ede4e4;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        th, td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #d1ab00;
+            color: white;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        td:not(:first-child) {
+            color: #666;
+        }
+        @media (max-width: 600px) {
+            th, td {
+                padding: 10px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+        <nav>
+            <h2 class="logo">Nice<span>Hair</span></h2><!--Logo-->
+            <ul class="cabeçalho-link">
+                <li><a href="inxex.html">Inicio</a></li>
+                <li><a href="serviços.html">Serviços</a></li>
+                <li><a href="horarios.html">Horarios</a></li>
+                <li><a href="contato.html">Contato</a></li>
+            </ul><!--cabeçalho-link-->
+            <a href ="login.php" class="btn">Logar</a>
+        
+        </nav>
+</div>
+    <div class="hours-container">
+        <h1>Horários de Funcionamento</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Dia da Semana</th>
+                    <th>Horário</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Segunda-feira</td>
+                    <td>18:00 - 22:00</td>
+                </tr>
+                <tr>
+                    <td>Terça-feira</td>
+                    <td>18:00 - 22:00</td>
+                </tr>
+                <tr>
+                    <td>Quarta-feira</td>
+                    <td>18:00 - 22:00</td>
+                </tr>
+                <tr>
+                    <td>Quinta-feira</td>
+                    <td>18:00 - 22:00</td>
+                </tr>
+                <tr>
+                    <td>Sexta-feira</td>
+                    <td>18:00 - 22:00</td>
+                </tr>
+                <tr>
+                    <td>Sábado</td>
+                    <td>18:00 - 22:00</td>
+                </tr>
+                <tr>
+                    <td>Domingo</td>
+                    <td>Fechado</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>
