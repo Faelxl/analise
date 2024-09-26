@@ -32,7 +32,7 @@ if (isset($_POST['submit']) && !empty($_POST['email']) && !empty($_POST['senha']
                 header("Location: adm.php");
             } else {
                 // Login válido para outro tipo de usuário, redireciona para home
-                header("Location: cardapio.php");
+                header("Location: horarios.html");
             }
         } else {
             echo "Email ou senha inválidos.";

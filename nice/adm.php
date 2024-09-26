@@ -18,10 +18,10 @@
        
     </header>
     <section class="contato">
-    <a href="listadecliente.php"><button>Lista de clientes</button></a>
-    <a href="produto.php"><button>Cadastrar produto</button></a>
-    <a href="cardapio.html"><button>visualizar sorvetes</button></a>
-    <a href="colab.html"><button>Colaboradores</button></a>
+    <a href="listacliente.php"><button>Lista de clientes</button></a>
+    <a href="cadastro_serviços.php"><button>Cadastrar produto</button></a>
+    <a href="cards.php"><button>visualizar os cards</button></a>
+    <a href="Funcionarios.php"><button>Colaboradores</button></a>
 
 
         

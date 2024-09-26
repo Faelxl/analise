@@ -127,5 +127,18 @@ background-repeat: no-repeat;
 background-size:cover;
 }
 
+.cards{
+    display: grid;
+    grid-template-columns: 24vw 24vw 24vw 24vw;
+    grid-template-rows: auto;
+    color: white;
+}
 
+.card{
+    width: 23vw;
+}
 
+.img1{
+    max-width: 23vw;
+    max-height: 23vh;
+}
