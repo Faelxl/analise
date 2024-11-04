@@ -10,7 +10,7 @@
         <h1> Barbearia - administrador</h1>
         <nav>
             <ul>
-                <li><a href="inxex.html">HOME</a></li>
+                <li><a href="inxex.php">HOME</a></li>
               
                 
               </ul>
@@ -19,7 +19,7 @@
     </header>
     <section class="contato">
     <a href="listacliente.php"><button>Lista de clientes</button></a>
-    <a href="cadastro_serviços.php"><button>Cadastrar produto</button></a>
+    <a href="cadastro_serviços.php"><button>Cadastrar serviço</button></a>
     <a href="cards.php"><button>visualizar os cards</button></a>
     <a href="Funcionarios.php"><button>Colaboradores</button></a>
 

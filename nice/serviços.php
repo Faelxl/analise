@@ -1,24 +1,43 @@
+<?php
+session_start();
+include_once("config.php");
+
+$email = isset($_SESSION['email']) ? $_SESSION['email'] : '';
+
+// Verifica se o usuário está logado
+if (!isset($_SESSION['email'])) {
+    header("Location: login.php"); // Redireciona para a página de login
+    exit();
+}
+
+// Execute a consulta
+$sql = "SELECT * FROM servico";
+$result = mysqli_query($conexao, $sql);
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
     <title>Nossos Serviços</title>
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
             margin: 0;
-            background-image: url('./img/Captura\ de\ tela\ 2024-08-05\ 145526.png'); 
+            background-image: url('./img/Captura\ de\ tela\ 2024-08-05\ 145526.png');
             background-size: cover; 
             background-position: center; 
+            background-attachment: fixed;
             background-repeat: no-repeat; 
             height: 100vh; 
             align-items: center;
             padding: 20px;
         }
-        nav{
+        nav {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
@@ -63,42 +82,43 @@
                 grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             }
         }
-        
     </style>
 </head>
 <body>
     <nav>
-        
-    <h2 class="logo">Nice<span>Hair</span></h2><!--Logo-->
-    <ul class="cabeçalho-link">
-        <li><a href="inxex.html">Inicio</a></li>
-        <li><a href="serviços.html">Serviços</a></li>
-        <li><a href="horarios.html">Horarios</a></li>
-        <li><a href="contato.html">Contato</a></li>
-    </ul><!--cabeçalho-link-->
-    <a href ="login.php" class="btn">Logar</a>
+        <h2 class="logo">Nice<span>Hair</span></h2><!-- Logo -->
+        <ul class="cabeçalho-link">
+        <li><a href="inxex.php">Início</a></li>
+            <li><a href="serviços.php">Serviços</a></li>
+            <li><a href="horarios.php">Horarios</a></li>
+            <li><a href="contato.php">Contato</a></li>
 
-</nav>
+            <?php 
+            if (empty($_SESSION['email'])) {
+                echo "<a href ='login.php' class='btn'>Logar</a>";
+            } else {
+                echo "<a href='logout.php' class='btn btn-danger me-5'>logout</a>";
+            }
+        ?>
+    </nav>
 
-            <div class="services-container">
+    <div class="services-container">
         <h1>Nossos Serviços</h1>
         <div class="services-grid">
-            <div class="service-item">
-                <img src="c:\Users\mateu.DESKTOP-C6TVACC\OneDrive\Imagens\xbigwesx-how-to-shape-a-beard--e1544729078585.jpg" alt="Serviço 1">
-                <h3>Corte de Cabelo Premium</h3>
-                <p>Experimente o luxo de um corte de cabelo premium com cuidados especiais, uma experiência única que combina estilo e tratamento personalizado</p>
-            </div>
-            <div class="service-item">
-                <img src="c:\Users\mateu.DESKTOP-C6TVACC\OneDrive\Imagens\mrkoachman_beardpost-71.webp" alt="Serviço 2">
-                <h3>Tratamento de Barba e Hidratação </h3>
-                <p>Ideal para quem deseja um cuidado profundo, este serviço inclui um tratamento de esfoliação da pele sob a barba para remover células mortas, seguido de uma hidratação intensiva com óleos e bálsamos específicos.</p>
-            </div>
-            <div class="service-item">
-                <img src="c:\Users\mateu.DESKTOP-C6TVACC\OneDrive\Imagens\da250352b74939d394d84a56bbada4f2.jpg" alt="Serviço 3">
-                <h3>Design de Sobrancelhas</h3>
-                <p>Transforme o seu olhar com o nosso serviço de design de sobrancelhas masculinas, uma experiência de cuidado e precisão que destaca sua expressão de forma sofisticada e natural. </p>
-            </div>
-    
+            <?php
+            // Verifica se há resultados e exibe os serviços
+            if (mysqli_num_rows($result) > 0) {
+                while ($row = mysqli_fetch_assoc($result)) {
+                    echo '<div class="service-item">';
+                    echo '<img src="' . $row['imagem'] . '">';
+                    echo '<h3>' . $row['nome_servico'] . '</h3>';
+                    echo '<p>' . $row['descricao'] . '</p>';
+                    echo '</div>';
+                }
+            } else {
+                echo '<p>Nenhum serviço encontrado.</p>';
+            }
+            ?>
         </div>
     </div>
 

@@ -1,47 +1,3 @@
-<?php
-include_once('config.php');
-if (isset($_POST['submit'])) {
-    function uploadImagem($imagem) {
-        $target_dir = "img/";
-        $target_file = $target_dir . basename($imagem["name"]);
-
-        if (move_uploaded_file($imagem["tmp_name"], $target_file)) {
-            return $target_file;
-        } else {
-            echo "Erro ao fazer upload da imagem.";
-            return null;
-        }
-    }
-
-    $imagem = $_FILES["imagem"];
-    $nome = $_POST['nome_produto'];
-    $descricao = $_POST['descricao'];
-    
-    $imagem_path = null;
-    if (isset($imagem) && $imagem["error"] === 0) {
-        $imagem_path = uploadImagem($imagem);
-        if (!$imagem_path) {
-            $erros[] = "Erro ao enviar a imagem.";
-        }
-    }
-
-    if ($imagem_path) {
-        $stmt = $conexao->prepare("INSERT INTO `servico` (imagem, nome_servico, descricao) VALUES (?, ?, ?)");
-        $stmt->bind_param("sss", $imagem_path, $nome, $descricao);
-
-        // Executando a query
-        if ($stmt->execute()) {
-            echo "Serviço cadastrado com sucesso";
-        } else {
-            echo "Erro ao inserir serviço: " . $stmt->error;
-        }
-
-        $stmt->close();
-    }
-
-    $conexao->close();
-}
-?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -98,6 +54,9 @@ if (isset($_POST['submit'])) {
         .form-container button:hover {
             background-color: #00b2d1;
         }
+        .mensage{
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -112,7 +71,50 @@ if (isset($_POST['submit'])) {
             
             <label for="descricao">Descrição:</label>
             <input type="text" id="descricao" name="descricao" required>
-            
+            <?php
+include_once('config.php');
+if (isset($_POST['submit'])) {
+    function uploadImagem($imagem) {
+        $target_dir = "img/";
+        $target_file = $target_dir . basename($imagem["name"]);
+
+        if (move_uploaded_file($imagem["tmp_name"], $target_file)) {
+            return $target_file;
+        } else {
+            echo "Erro ao fazer upload da imagem.";
+            return null;
+        }
+    }
+
+    $imagem = $_FILES["imagem"];
+    $nome = $_POST['nome_produto'];
+    $descricao = $_POST['descricao'];
+    
+    $imagem_path = null;
+    if (isset($imagem) && $imagem["error"] === 0) {
+        $imagem_path = uploadImagem($imagem);
+        if (!$imagem_path) {
+            $erros[] = "Erro ao enviar a imagem.";
+        }
+    }
+
+    if ($imagem_path) {
+        $stmt = $conexao->prepare("INSERT INTO `servico` (imagem, nome_servico, descricao) VALUES (?, ?, ?)");
+        $stmt->bind_param("sss", $imagem_path, $nome, $descricao);
+
+        // Executando a query
+        if ($stmt->execute()) {
+            echo "Serviço cadastrado com sucesso";
+        } else {
+            echo "Erro ao inserir serviço: " . $stmt->error;
+        }
+
+        $stmt->close();
+    }
+
+    $conexao->close();
+}
+?>
             <button type="submit" name="submit">Cadastrar</button>
         </form>
     </div>

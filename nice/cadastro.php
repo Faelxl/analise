@@ -1,6 +1,6 @@
-<?php
-if (isset($_POST['submit'])) 
-    include_once("config.php");
+<?php 
+session_start();
+include_once("config.php");
 
 // Function to sanitize user input
 function sanitizeInput($data) {
@@ -12,20 +12,27 @@ function sanitizeInput($data) {
 
 // Process registration form submission
 if (isset($_POST['submit'])) {
-
     // Sanitize user input
     $nome = sanitizeInput($_POST['nome']);
     $email = sanitizeInput($_POST['email']);
     $senha = sanitizeInput($_POST['senha']);
 
-
+    // Prepare SQL statement
     $sql = "INSERT INTO usuários (nome, email, senha) VALUES (?, ?, ?)";
     $stmt = $conexao->prepare($sql);
     $stmt->bind_param('sss', $nome, $email, $senha);
 
     if ($stmt->execute()) {
-        echo "<p class='mensagem'>cadastro realizado </p>";
-        header('location: login.php');
+        // Automatically log in the user after registration
+        $_SESSION['email'] = $email; // Use the email just registered
+        $_SESSION['senha'] = $senha;  // Use the password just registered
+        
+        // Verifica o tipo de usuário se necessário, por exemplo:
+        // $_SESSION['tipo'] = 0; // Ou qualquer lógica que você tenha
+        
+        // Redireciona para a página de acordo com o tipo de usuário
+        header("Location: horarios.php"); // Ou a página que você deseja
+        exit();
     } else {
         echo "<p class='error'>Falha ao cadastrar usuário: " . $conexao->error . "</p>";
     }
@@ -48,10 +55,6 @@ if (isset($_POST['submit'])) {
             display: flex;
             justify-content: center;
             align-items: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             margin: 0;
         }
         .form-container {
